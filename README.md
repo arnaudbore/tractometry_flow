@@ -46,9 +46,9 @@ Launch your Nextflow command with:
 ---------
 The official release 2.1.0 is **NOT** available now.
 
-Please, either build the singularity container using this command: 
+Please, either build the singularity container using this command:
 
-`singularity build scilus_latest.sif docker://scilus/scilus:latest` 
+`singularity build scilus_latest.sif docker://scilus/scilus:latest`
 
 and then launch your Nextflow command with:
 `-with-singularity ABSOLUTE_PATH/scilus_latest.sif`
