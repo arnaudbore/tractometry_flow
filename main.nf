@@ -636,10 +636,18 @@ process Bundle_Endpoints_Metrics {
         b_metrics+=" afd_metric.nii.gz"
     fi
 
-    scil_tractogram_project_streamlines_to_map.py \$bundle \${bname} --in_metrics \${b_metrics} --from_wm
+    scil_tractogram_project_map_to_streamlines.py \${bundle} \${bundle/.trk/_with_dpp.trk} \
+        --in_maps \${b_metrics} \
+        --out_dpp_name \${b_metrics//.nii.gz/}
+
+    scil_tractogram_project_streamlines_to_map.py \${bundle/.trk/_with_dpp.trk} \${bname}/ \
+        --use_dpp \${b_metrics//.nii.gz/} \
+        --mean_streamline \
+        --to_endpoints
+
     cd \${bname}
     for i in *.nii.gz;
-        do mv "\$i" "${sid}__\$i";
+        do mv "\$i" "${sid}__\${i/.nii.gz/_endpoints_metric.nii.gz}";
     done
 
     for i in *;
